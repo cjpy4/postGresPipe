@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 
 	_ "github.com/lib/pq"
 )
@@ -100,5 +102,24 @@ func main() {
 	}
 
 	fmt.Println(string(obj))
+
+	posturl := "https://webhook.site/565e147a-604c-45dc-92de-17735c261772"
+
+	body := obj
+
+	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
+	if err != nil {
+		panic(err)
+	}
+
+	r.Header.Add("Content-Type", "application/json")
+
+	client := &http.Client{}
+	res, err := client.Do(r)
+	if err != nil {
+		panic(err)
+	}
+
+	defer res.Body.Close()
 
 }
