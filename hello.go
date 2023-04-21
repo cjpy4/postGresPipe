@@ -40,12 +40,6 @@ func getRows() ([]Row, error) {
 	defer rows.Close()
 
 	for rows.Next() {
-		/* value := Row{
-			Id:         6,
-			First_name: "sammy",
-			Last_name:  "theshark",
-			Email:      "sammyshark@email",
-		} */
 		var value Row
 		if err != nil {
 			log.Println(err)
@@ -95,7 +89,6 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	// jsonRows, err := json.Marshal(rows)
 
 	if err != nil {
 		log.Fatal(err)
